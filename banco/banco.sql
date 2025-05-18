@@ -1,0 +1,24 @@
+CREATE DATABASE prefeitura;
+
+USE prefeitura;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE menu_itens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE colunas_tabela (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE registros (
+    id INT AUTO_INCREMENT PRIMARY KEY
+);

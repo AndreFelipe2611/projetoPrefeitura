@@ -1,0 +1,86 @@
+/* Estilo para a página da Prefeitura */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa; /* Fundo cinza claro */
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+header {
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #6c757d;
+    font-size: 1.1em;
+}
+
+.caixa-tabela {
+    overflow-x: auto; /* Adiciona scroll horizontal se a tabela for muito larga */
+}
+
+.tabela-registros {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.tabela-registros th,
+.tabela-registros td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tabela-registros thead th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabela-registros tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.tabela-registros tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.acao-visualizar {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.acao-visualizar:hover {
+    background-color: #0056b3;
+}
+
+.tabela-registros td span {
+    color: #888;
+    font-style: italic;
+}

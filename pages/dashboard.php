@@ -11,7 +11,6 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     }
 }
 ?>
-<!-- ========================================================= -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,26 +19,19 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     <link rel="stylesheet" href="../assets/dashboard.css">
 </head>
 <body>
-<!-- ========================================================= -->
     <div class="menu-lateral">
-        <div class="logo">Prefeitura</div>
+        <div class="logo">Ansal</div>
         <button id="botao-menu" class="botao-menu" onclick="alternarAbas()">☰</button>
         <div id="abas" class="abas">
-            <a href="#">Início</a>
-            <a href="admin.php">Admin</a>
-            <a href="#">Sair</a>
-        </div>
-    </div>
-<!-- ========================================================= -->
-    <div class="conteudo-principal">
-        
-        <div class="botoes-superiores">
             <button class="botao-verde">Verificados</button>
             <button class="botao-vermelho">Não Verificados</button>
             <button class="botao-historico" onclick="mostrarTabela()">Histórico</button>
             <button class="botao-adicionar" onclick="mostrarFormulario()">Adicionar</button>
+            <a href="../index.php">Sair</a>
         </div>
-<!-- ========================================================= -->
+    </div>
+
+    <div class="conteudo-principal">
         <!-- Formulário dinâmico -->
         <div id="formulario-adicao" style="display:none; margin-top: 20px;">
             <form method="POST" action="../controles/salvarRegistro.php">
@@ -52,7 +44,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
                 <button type="submit">Salvar</button>
             </form>
         </div>
-<!-- ========================================================= -->
+
         <!-- Tabela dinâmica -->
         <div class="caixa-tabela" id="tabela-historico">
             <table class="tabela-principal">
@@ -82,7 +74,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
             </table>
         </div>
     </div>
-    
+
     <script>
         function alternarAbas() {
             const abas = document.getElementById("abas");
@@ -103,4 +95,3 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     </script>
 </body>
 </html>
-<!-- ========================================================= -->

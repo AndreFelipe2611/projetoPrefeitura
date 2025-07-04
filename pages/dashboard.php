@@ -1,12 +1,12 @@
 <?php
 include("../conexao.php");
 
-// Buscar colunas da tabela registros diretamente
+// Buscar colunas da tabela registros diretamente (exceto 'id' e 'caminho_arquivo')
 $colunas_resultado = $conexao->query("SHOW COLUMNS FROM registros");
 $colunas_tabela = [];
 
 while ($coluna = $colunas_resultado->fetch_assoc()) {
-    if ($coluna['Field'] !== 'id') {
+    if ($coluna['Field'] !== 'id' && $coluna['Field'] !== 'caminho_arquivo') {
         $colunas_tabela[] = $coluna['Field'];
     }
 }
@@ -15,7 +15,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Página Inicial</title>
+    <title>Dashboard Ansal</title>
     <link rel="stylesheet" href="../assets/dashboard.css">
 </head>
 <body>
@@ -27,32 +27,34 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
             <button class="botao-vermelho">Não Verificados</button>
             <button class="botao-historico" onclick="mostrarTabela()">Histórico</button>
             <button class="botao-adicionar" onclick="mostrarFormulario()">Adicionar</button>
-            <a href="../index.php">Sair</a>
+            <a href="../logout.php">Sair</a>
         </div>
     </div>
 
     <div class="conteudo-principal">
-        <!-- Formulário dinâmico -->
         <div id="formulario-adicao" style="display:none; margin-top: 20px;">
-            <form method="POST" action="../controles/salvarRegistro.php">
+            <form method="POST" action="../controles/salvarRegistro.php" enctype="multipart/form-data">
                 <?php foreach ($colunas_tabela as $coluna): ?>
                     <div>
-                        <label><?php echo htmlspecialchars($coluna); ?>:</label>
+                        <label><?php echo htmlspecialchars(ucfirst($coluna)); ?>:</label>
                         <input type="text" name="dados[<?php echo htmlspecialchars($coluna); ?>]" required>
                     </div>
                 <?php endforeach; ?>
+                <div>
+                    <label>Enviar Arquivo/Foto:</label>
+                    <input type="file" name="arquivo" style="color: white;">
+                </div>
                 <button type="submit">Salvar</button>
             </form>
         </div>
 
-        <!-- Tabela dinâmica -->
         <div class="caixa-tabela" id="tabela-historico">
             <table class="tabela-principal">
                 <thead>
                     <tr>
                         <th>#</th>
                         <?php foreach ($colunas_tabela as $coluna): ?>
-                            <th><?php echo htmlspecialchars($coluna); ?></th>
+                            <th><?php echo htmlspecialchars(ucfirst($coluna)); ?></th>
                         <?php endforeach; ?>
                         <th>Ações</th>
                     </tr>
@@ -67,7 +69,13 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
                             <?php foreach ($colunas_tabela as $coluna): ?>
                                 <td><?php echo htmlspecialchars($linha[$coluna] ?? ''); ?></td>
                             <?php endforeach; ?>
-                            <td></td>
+                            <td>
+                                <?php if (!empty($linha['caminho_arquivo'])): ?>
+                                    <a href="../uploads/<?php echo htmlspecialchars($linha['caminho_arquivo']); ?>" target="_blank" class="acao visualizar" title="Visualizar anexo">
+                                        👁️ Ver
+                                    </a>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
@@ -92,6 +100,11 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
             document.getElementById("formulario-adicao").style.display = "none";
             document.getElementById("tabela-historico").style.display = "block";
         }
+
+        // Mostrar a tabela por padrão ao carregar a página
+        document.addEventListener("DOMContentLoaded", function() {
+            mostrarTabela();
+        });
     </script>
 </body>
 </html>

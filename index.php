@@ -1,6 +1,20 @@
 <?php
 session_start();
-require_once 'conexao.php'; 
+require_once './conexao.php'; // Garanta que este caminho está correto
+
+// Se o usuário já estiver logado, redireciona para a página correta
+if (isset($_SESSION['usuario'])) {
+    if ($_SESSION['usuario'] === 'ansal') {
+        // CORRIGIDO: padronizado para a pasta 'telas'
+        header("Location: ./pages/dashboard.php");
+        exit();
+    } elseif ($_SESSION['usuario'] === 'prefeitura') {
+        // CORRIGIDO: padronizado para a pasta 'telas'
+        header("Location: ./pages/dashboard2.php");
+        exit();
+    }
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['usuario'];
@@ -16,8 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (password_verify($senha, $usuario['senha'])) {
             $_SESSION['usuario'] = $usuario['nome'];
-            header("Location: ./pages/dashboard.php"); 
-            exit();
+
+            if ($usuario['nome'] === 'ansal') {
+                header("Location: ./pages/dashboard.php");
+                exit();
+            } elseif ($usuario['nome'] === 'prefeitura') {
+                // CORRIGIDO: Apontava para um arquivo inexistente. Agora aponta para o correto.
+                header("Location: ./pages/dashboard2.php");
+                exit();
+            } else {
+                header("Location: ./telas/dashboard.php");
+                exit();
+            }
+
         } else {
             $erro = "Senha incorreta.";
         }
@@ -32,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css"> 
 </head>
 <body>
     <div class="container-login">
@@ -41,9 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <select name="usuario" required>
                 <option value="">Selecione o usuário</option>
                 <?php
-                // listar todos os usuários do banco
-                $resultado = $conexao->query("SELECT nome FROM usuarios");
-                while ($linha = $resultado->fetch_assoc()) {
+                $resultado_usuarios = $conexao->query("SELECT nome FROM usuarios ORDER BY nome ASC");
+                while ($linha = $resultado_usuarios->fetch_assoc()) {
                     echo "<option value=\"" . htmlspecialchars($linha['nome']) . "\">" . htmlspecialchars($linha['nome']) . "</option>";
                 }
                 ?>

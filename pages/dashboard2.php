@@ -15,7 +15,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <title>Painel de Visualização - Prefeitura</title>
-    <link rel="stylesheet" href="../css/prefeitura.css">
+    <link rel="stylesheet" href="../assets/dashboard2.css">
 </head>
 <body>
 

@@ -1,5 +1,6 @@
 /* ========================================================= */
-/* resete básico */
+/* 🧼 RESET BÁSICO E LAYOUT GERAL */
+/* ========================================================= */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,8 +10,17 @@ body {
     height: 100vh;
 }
 
+.conteudo-principal {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    backdrop-filter: blur(6px);
+}
+
+
 /* ========================================================= */
-/* navbar lateral */
+/* 📦 MENU LATERAL FIXO */
+/* ========================================================= */
 .menu-lateral {
     width: 240px;
     background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
@@ -31,8 +41,10 @@ body {
     letter-spacing: 2px;
 }
 
+
 /* ========================================================= */
-/* botão menu animado*/
+/* 🍔 BOTÃO DE MENU HAMBÚRGUER (RESPONSIVO OU MOBILE) */
+/* ========================================================= */
 .botao-menu {
     background-color: white;
     color: #2c5364;
@@ -55,8 +67,10 @@ body {
     color: white;
 }
 
+
 /* ========================================================= */
-/* abas */
+/* 📁 ABAS DO MENU LATERAL */
+/* ========================================================= */
 .abas {
     display: flex;
     flex-direction: column;
@@ -89,64 +103,58 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ========================================================= */
-/* centro */
-.conteudo-principal {
-    flex: 1;
-    padding: 40px;
-    overflow-y: auto;
-    backdrop-filter: blur(6px);
-}
 
+/* ========================================================= */
+/* 🎨 BOTÕES DE AÇÃO (ABA LATERAL) */
+/* ========================================================= */
 .botao-verde {
     background: linear-gradient(to right, #56ab2f, #a8e063);
-    text-decoration: none;
     color: white;
     font-weight: bold;
     padding: 10px;
     border-radius: 6px;
-    transition: background 0.3s;
     cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
 }
 
 .botao-vermelho {
     background: linear-gradient(to right, #e52d27, #b31217);
     color: white;
-    text-decoration: none;
-    color: white;
     font-weight: bold;
     padding: 10px;
     border-radius: 6px;
-    transition: background 0.3s;
     cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
 }
-
 
 .botao-historico {
     background: linear-gradient(to right, #1161b8, #29323c);
     color: white;
-    text-decoration: none;
-    color: white;
     font-weight: bold;
     padding: 10px;
     border-radius: 6px;
-    transition: background 0.3s;
     cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
 }
 
 .botao-adicionar {
     background: linear-gradient(to right, #00c6ff, #0072ff);
     color: white;
-    text-decoration: none;
-    color: white;
     font-weight: bold;
     padding: 10px;
     border-radius: 6px;
-    transition: background 0.3s;
     cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
 }
+
+
 /* ========================================================= */
-/* formulário adicionar */
+/* ➕ FORMULÁRIO DE ADICIONAR REGISTRO */
+/* ========================================================= */
 #formulario-adicao form {
     display: flex;
     flex-direction: column;
@@ -190,8 +198,10 @@ body {
     transform: scale(1.03);
 }
 
+
 /* ========================================================= */
-/* TABELA DE HISTÓRICO */
+/* 📜 TABELA DE HISTÓRICO */
+/* ========================================================= */
 .caixa-tabela {
     display: flex;
     justify-content: center;
@@ -231,8 +241,10 @@ body {
     letter-spacing: 1px;
 }
 
+
 /* ========================================================= */
-/* AÇÕES FUTURAS */
+/* 🛠️ AÇÕES DA TABELA (Visualizar, Editar, Excluir) */
+/* ========================================================= */
 .coluna-acoes {
     display: flex;
     justify-content: center;

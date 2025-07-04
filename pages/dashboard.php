@@ -17,6 +17,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     <meta charset="UTF-8">
     <title>Dashboard Ansal</title>
     <link rel="stylesheet" href="../assets/dashboard.css">
+    <link rel="stylesheet" href="../assets/componentes.css">
 </head>
 <body>
     <div class="menu-lateral">
@@ -32,55 +33,8 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     </div>
 
     <div class="conteudo-principal">
-        <div id="formulario-adicao" style="display:none; margin-top: 20px;">
-            <form method="POST" action="../controles/salvarRegistro.php" enctype="multipart/form-data">
-                <?php foreach ($colunas_tabela as $coluna): ?>
-                    <div>
-                        <label><?php echo htmlspecialchars(ucfirst($coluna)); ?>:</label>
-                        <input type="text" name="dados[<?php echo htmlspecialchars($coluna); ?>]" required>
-                    </div>
-                <?php endforeach; ?>
-                <div>
-                    <label>Enviar Arquivo/Foto:</label>
-                    <input type="file" name="arquivo" style="color: white;">
-                </div>
-                <button type="submit">Salvar</button>
-            </form>
-        </div>
-
-        <div class="caixa-tabela" id="tabela-historico">
-            <table class="tabela-principal">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <?php foreach ($colunas_tabela as $coluna): ?>
-                            <th><?php echo htmlspecialchars(ucfirst($coluna)); ?></th>
-                        <?php endforeach; ?>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $result = $conexao->query("SELECT * FROM registros ORDER BY id DESC");
-                    while ($linha = $result->fetch_assoc()):
-                    ?>
-                        <tr>
-                            <td><?php echo $linha['id']; ?></td>
-                            <?php foreach ($colunas_tabela as $coluna): ?>
-                                <td><?php echo htmlspecialchars($linha[$coluna] ?? ''); ?></td>
-                            <?php endforeach; ?>
-                            <td>
-                                <?php if (!empty($linha['caminho_arquivo'])): ?>
-                                    <a href="../uploads/<?php echo htmlspecialchars($linha['caminho_arquivo']); ?>" target="_blank" class="acao visualizar" title="Visualizar anexo">
-                                        👁️ Ver
-                                    </a>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
+        <?php include("../subPages/adicionar.php"); ?>
+        <?php include("../subPages/historico.php"); ?>
     </div>
 
     <script>

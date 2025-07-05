@@ -1,8 +1,7 @@
-/* Estilo para a página da Prefeitura */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7fa; /* Fundo cinza claro */
+    background-color: #f4f7fa;
     color: #333;
 }
 
@@ -33,7 +32,7 @@ header p {
 }
 
 .caixa-tabela {
-    overflow-x: auto; /* Adiciona scroll horizontal se a tabela for muito larga */
+    overflow-x: auto;
 }
 
 .tabela-registros {
@@ -49,10 +48,11 @@ header p {
     border-bottom: 1px solid #e9ecef;
 }
 
+/* Cabeçalho da tabela com cor verde água */
 .tabela-registros thead th {
-    background-color: #e9ecef;
+    background-color: #20c997; /* verde água (teal/aqua) */
+    color: white;
     font-weight: 600;
-    color: #495057;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -65,10 +65,11 @@ header p {
     border-bottom: none;
 }
 
+/* Botão de visualizar anexo em laranja */
 .acao-visualizar {
     display: inline-block;
     padding: 6px 12px;
-    background-color: #007bff;
+    background-color: #fd7e14; /* laranja */
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -77,7 +78,7 @@ header p {
 }
 
 .acao-visualizar:hover {
-    background-color: #0056b3;
+    background-color: #e8590c;
 }
 
 .tabela-registros td span {

@@ -24,8 +24,6 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
         <div class="logo">Ansal</div>
         <button id="botao-menu" class="botao-menu" onclick="alternarAbas()">☰</button>
         <div id="abas" class="abas">
-            <button class="botao-verde">Verificados</button>
-            <button class="botao-vermelho">Não Verificados</button>
             <button class="botao-historico" onclick="mostrarTabela()">Histórico</button>
             <button class="botao-adicionar" onclick="mostrarFormulario()">Adicionar</button>
             <a href="../logout.php">Sair</a>
@@ -33,6 +31,10 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     </div>
 
     <div class="conteudo-principal">
+        <div id="mensagem-boas-vindas">
+            <h2>Olá caro colaborador, bora trabalhar??</h2>
+        </div>
+
         <?php include("../subPages/adicionar.php"); ?>
         <?php include("../subPages/historico.php"); ?>
     </div>
@@ -46,18 +48,21 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
         }
 
         function mostrarFormulario() {
+            document.getElementById("mensagem-boas-vindas").style.display = "none";
             document.getElementById("formulario-adicao").style.display = "block";
             document.getElementById("tabela-historico").style.display = "none";
         }
 
         function mostrarTabela() {
+            document.getElementById("mensagem-boas-vindas").style.display = "none";
             document.getElementById("formulario-adicao").style.display = "none";
             document.getElementById("tabela-historico").style.display = "block";
         }
 
-        // Mostrar a tabela por padrão ao carregar a página
         document.addEventListener("DOMContentLoaded", function() {
-            mostrarTabela();
+            document.getElementById("formulario-adicao").style.display = "none";
+            document.getElementById("tabela-historico").style.display = "none";
+            document.getElementById("mensagem-boas-vindas").style.display = "block";
         });
     </script>
 </body>

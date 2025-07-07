@@ -1,10 +1,10 @@
-/* ========================================================= */
-/* 🧼 RESET BÁSICO E LAYOUT GERAL */
-/* ========================================================= */
+/* ====================== */
+/* 🎨 RESET E LAYOUT BASE */
+/* ====================== */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa; /* branco gelo */
+    background-color: #f5f7fa;
     color: #333;
     display: flex;
     height: 100vh;
@@ -17,11 +17,9 @@ body {
     backdrop-filter: blur(6px);
 }
 
-
-
-/* ========================================================= */
-/* 📦 MENU LATERAL FIXO */
-/* ========================================================= */
+/* ====================== */
+/* 📁 MENU LATERAL FIXO */
+/* ====================== */
 .menu-lateral {
     width: 240px;
     background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
@@ -32,7 +30,6 @@ body {
     gap: 30px;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
     position: relative;
-    z-index: 10;
 }
 
 .logo {
@@ -42,10 +39,7 @@ body {
     letter-spacing: 2px;
 }
 
-
-/* ========================================================= */
-/* 🍔 BOTÃO DE MENU HAMBÚRGUER (RESPONSIVO OU MOBILE) */
-/* ========================================================= */
+/* 🍔 Botão hambúrguer */
 .botao-menu {
     background-color: white;
     color: #2c5364;
@@ -68,10 +62,7 @@ body {
     color: white;
 }
 
-
-/* ========================================================= */
-/* 📁 ABAS DO MENU LATERAL */
-/* ========================================================= */
+/* Abas do menu */
 .abas {
     display: flex;
     flex-direction: column;
@@ -90,6 +81,7 @@ body {
     pointer-events: auto;
 }
 
+.abas button,
 .abas a {
     text-decoration: none;
     color: white;
@@ -98,64 +90,19 @@ body {
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.1);
     transition: background 0.3s;
+    border: none;
+    text-align: left;
+    cursor: pointer;
 }
 
+.abas button:hover,
 .abas a:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-
-/* ========================================================= */
-/* 🎨 BOTÕES DE AÇÃO (ABA LATERAL) */
-/* ========================================================= */
-.botao-verde {
-    background: linear-gradient(to right, #56ab2f, #a8e063);
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-}
-
-.botao-vermelho {
-    background: linear-gradient(to right, #e52d27, #b31217);
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-}
-
-.botao-historico {
-    background: linear-gradient(to right, #1161b8, #29323c);
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-}
-
-.botao-adicionar {
-    background: linear-gradient(to right, #00c6ff, #0072ff);
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-}
-
-
-/* ========================================================= */
-/* ➕ FORMULÁRIO DE ADICIONAR REGISTRO */
-/* ========================================================= */
+/* ====================== */
+/* ➕ FORMULÁRIO ADIÇÃO */
+/* ====================== */
 #formulario-adicao form {
     display: flex;
     flex-direction: column;
@@ -170,10 +117,10 @@ body {
 
 #formulario-adicao label {
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
-#formulario-adicao input[type="text"] {
+#formulario-adicao input[type="text"],
+#formulario-adicao input[type="file"] {
     padding: 10px;
     border: none;
     border-radius: 6px;
@@ -199,17 +146,16 @@ body {
     transform: scale(1.03);
 }
 
-
-/* ========================================================= */
+/* ====================== */
 /* 📜 TABELA DE HISTÓRICO */
-/* ========================================================= */
+/* ====================== */
 .caixa-tabela {
     display: flex;
     justify-content: center;
     overflow-x: auto;
 }
 
-.tabela-principal {
+.tabela-registros {
     width: 100%;
     max-width: 1200px;
     border-collapse: collapse;
@@ -220,58 +166,41 @@ body {
     color: white;
 }
 
-.tabela-principal thead {
+.tabela-registros thead {
     background-color: #111;
 }
 
-.tabela-principal th,
-.tabela-principal td {
+.tabela-registros th,
+.tabela-registros td {
     padding: 14px 18px;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.tabela-principal tr:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.tabela-principal th {
+.tabela-registros th {
     background-color: #2c5feb;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-
-/* ========================================================= */
-/* 🛠️ AÇÕES DA TABELA (Visualizar, Editar, Excluir) */
-/* ========================================================= */
-.coluna-acoes {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+.tabela-registros tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.acao {
-    border: none;
-    background-color: transparent;
-    font-size: 18px;
-    cursor: pointer;
-    transition: transform 0.2s;
+/* ====================== */
+/* 🏷️ STATUS DO REGISTRO */
+/* ====================== */
+.tabela-registros td:last-child {
+    font-weight: bold;
 }
 
-.acao:hover {
-    transform: scale(1.2);
+.tabela-registros td:last-child::before {
+    content: "❌ ";
+    color: #ff4c4c;
 }
 
-.visualizar {
-    color: #00c4b4;
-}
-
-.editar {
-    color: #ffc107;
-}
-
-.excluir {
-    color: #ff3d3d;
+.tabela-registros tr[data-status="verificado"] td:last-child::before {
+    content: "✅ ";
+    color: #00cc66;
 }

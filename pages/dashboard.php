@@ -1,14 +1,13 @@
 <?php
 include("../conexao.php");
 
-// Buscar colunas da tabela registros, exceto 'id' e 'caminho_arquivo' (ajustado para 'caminhoArquivo' que o dashboard2 usa)
+// Buscar colunas da tabela registros, exceto 'id' e 'caminho_arquivo'
 $colunas_resultado = $conexao->query("SHOW COLUMNS FROM registros");
 $colunas_tabela = [];
 
 while ($coluna = $colunas_resultado->fetch_assoc()) {
     $campo = $coluna['Field'];
-    if ($campo !== 'id' && $campo !== 'caminhoArquivo' && $campo !== 'caminho_arquivo') { 
-        // inclui 'caminho_arquivo' só pra garantir que não aparece, dependendo do campo que estiver na tabela
+    if ($campo !== 'id' && $campo !== 'caminhoArquivo' && $campo !== 'caminho_arquivo') {
         $colunas_tabela[] = $campo;
     }
 }
@@ -56,7 +55,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
             </form>
         </div>
 
-        <!-- TABELA HISTÓRICO - versão dashboard2 (sem checkbox) -->
+        <!-- TABELA HISTÓRICO -->
         <div id="tabela-historico" class="caixa-tabela" style="display:none;">
             <table class="tabela-registros">
                 <thead>
@@ -74,7 +73,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
                     $result = $conexao->query("SELECT * FROM registros ORDER BY id DESC");
                     if ($result->num_rows > 0):
                         while ($linha = $result->fetch_assoc()):
-                            $status = (isset($linha['verificado']) && $linha['verificado'] == 1) ? '✅ Verificado' : '❌ Não Verificado';
+                            $status = (isset($linha['concluido']) && $linha['concluido'] == 1) ? '✅ Verificado' : '❌ Não Verificado';
                     ?>
                         <tr>
                             <td><?php echo $linha['id']; ?></td>
@@ -90,7 +89,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
                                     <span>Sem anexo</span>
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo $status; ?></td>
+                            <td class="status-coluna"><?php echo $status; ?></td>
                         </tr>
                     <?php
                         endwhile;
@@ -129,8 +128,9 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
         function filtrarTabela(filtro) {
             const linhas = document.querySelectorAll("#tabela-historico tbody tr");
             linhas.forEach(linha => {
-                const status = linha.cells[linha.cells.length - 1].textContent.includes('Verificado') ? 'verificado' : 'nao-verificado';
-                if (filtro === 'todos' || status === filtro) {
+                const textoStatus = linha.querySelector("td.status-coluna")?.textContent || '';
+                const status = textoStatus.includes('✅') ? 'verificado' : 'nao-verificado';
+                if (filtro === 'todos' || filtro === status) {
                     linha.style.display = "";
                 } else {
                     linha.style.display = "none";

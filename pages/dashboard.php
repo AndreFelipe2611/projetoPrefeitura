@@ -73,9 +73,10 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
                     $result = $conexao->query("SELECT * FROM registros ORDER BY id DESC");
                     if ($result->num_rows > 0):
                         while ($linha = $result->fetch_assoc()):
-                            $status = (isset($linha['concluido']) && $linha['concluido'] == 1) ? '✅ Verificado' : '❌ Não Verificado';
+                            $verificado = (isset($linha['concluido']) && $linha['concluido'] == 1);
+                            $status = $verificado ? '✅ Verificado' : '❌ Não Verificado';
                     ?>
-                        <tr>
+                        <tr data-status="<?php echo $verificado ? 'verificado' : 'nao-verificado'; ?>">
                             <td><?php echo $linha['id']; ?></td>
                             <?php foreach ($colunas_tabela as $coluna): ?>
                                 <td><?php echo htmlspecialchars($linha[$coluna] ?? 'N/A'); ?></td>
@@ -127,9 +128,9 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
 
         function filtrarTabela(filtro) {
             const linhas = document.querySelectorAll("#tabela-historico tbody tr");
+
             linhas.forEach(linha => {
-                const textoStatus = linha.querySelector("td.status-coluna")?.textContent || '';
-                const status = textoStatus.includes('✅') ? 'verificado' : 'nao-verificado';
+                const status = linha.getAttribute("data-status");
                 if (filtro === 'todos' || filtro === status) {
                     linha.style.display = "";
                 } else {

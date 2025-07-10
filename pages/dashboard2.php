@@ -1,11 +1,11 @@
 <?php
 include("../conexao.php");
 
-// Buscar colunas da tabela registros (exceto 'id' e 'caminhoArquivo')
+// Buscar colunas da tabela registros (exceto 'id', 'caminhoArquivo' e 'concluido')
 $colunas_resultado = $conexao->query("SHOW COLUMNS FROM registros");
 $colunas_tabela = [];
 while ($coluna = $colunas_resultado->fetch_assoc()) {
-    if ($coluna['Field'] !== 'id' && $coluna['Field'] !== 'caminhoArquivo' && $coluna['Field'] !== 'concluido') {
+    if (!in_array($coluna['Field'], ['id', 'anexos', 'concluido', 'caminhoArquivo'])) {
         $colunas_tabela[] = $coluna['Field'];
     }
 }
@@ -110,21 +110,20 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        // Inicializa com a mensagem de boas-vindas
+        // Mensagem inicial
         document.getElementById("mensagem-boas-vindas").style.display = "flex";
         document.getElementById("tabela-historico").style.display = "none";
 
-        // Configura evento para cada checkbox
-        document.querySelectorAll(".checkbox-concluido").forEach(checkbox => {
-            checkbox.addEventListener("change", function () {
-                const tr = this.closest("tr");
+        // Delegação de evento para checkboxes
+        document.querySelector(".tabela-registros tbody").addEventListener("change", function (e) {
+            if (e.target.classList.contains("checkbox-concluido")) {
+                const checkbox = e.target;
+                const tr = checkbox.closest("tr");
                 const id = tr.getAttribute("data-id");
-                const novoStatus = this.checked ? 1 : 0;
+                const novoStatus = checkbox.checked ? 1 : 0;
 
-                // Atualiza atributo visual
-                tr.setAttribute("data-concluido", this.checked ? "sim" : "nao");
+                tr.setAttribute("data-concluido", checkbox.checked ? "sim" : "nao");
 
-                // Faz requisição AJAX para salvar no banco
                 fetch("../controles/checkout.php", {
                     method: "POST",
                     headers: {
@@ -140,7 +139,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
                     alert("Erro ao salvar o status!");
                     console.error(err);
                 });
-            });
+            }
         });
     });
 </script>

@@ -1,13 +1,14 @@
 <?php
 include("../conexao.php");
 
-// Buscar colunas da tabela registros, exceto 'id' e 'caminho_arquivo'
+// Buscar colunas da tabela registros, ignorando campos indesejados
 $colunas_resultado = $conexao->query("SHOW COLUMNS FROM registros");
 $colunas_tabela = [];
+$colunas_ignoradas = ['id', 'caminhoArquivo', 'caminho_arquivo', 'concluido'];
 
 while ($coluna = $colunas_resultado->fetch_assoc()) {
     $campo = $coluna['Field'];
-    if ($campo !== 'id' && $campo !== 'caminhoArquivo' && $campo !== 'caminho_arquivo') {
+    if (!in_array($campo, $colunas_ignoradas)) {
         $colunas_tabela[] = $campo;
     }
 }
@@ -27,8 +28,8 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
         <div id="abas" class="abas">
             <button class="botao-historico" onclick="mostrarTabela()">Histórico</button>
             <button class="botao-adicionar" onclick="mostrarFormulario()">Adicionar</button>
-            <button onclick="filtrarTabela('verificado')">Verificados</button>
-            <button onclick="filtrarTabela('nao-verificado')">Não Verificados</button>
+            <button onclick="filtrarVerificados()">Verificados</button>
+            <button onclick="filtrarNaoVerificados()">Não Verificados</button>
             <a href="../logout.php">Sair</a>
         </div>
     </div>
@@ -124,6 +125,20 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
             document.getElementById("formulario-adicao").style.display = "none";
             document.getElementById("tabela-historico").style.display = "block";
             filtrarTabela('todos');
+        }
+
+        function filtrarVerificados() {
+            document.getElementById("mensagem-boas-vindas").style.display = "none";
+            document.getElementById("formulario-adicao").style.display = "none";
+            document.getElementById("tabela-historico").style.display = "block";
+            filtrarTabela('verificado');
+        }
+
+        function filtrarNaoVerificados() {
+            document.getElementById("mensagem-boas-vindas").style.display = "none";
+            document.getElementById("formulario-adicao").style.display = "none";
+            document.getElementById("tabela-historico").style.display = "block";
+            filtrarTabela('nao-verificado');
         }
 
         function filtrarTabela(filtro) {

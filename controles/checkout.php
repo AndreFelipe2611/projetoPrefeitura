@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $concluido = $_POST['concluido'] ?? null;
 
     if ($id !== null && ($concluido === "0" || $concluido === "1")) {
-        // Prepare statement para evitar SQL Injection
         $stmt = $conexao->prepare("UPDATE registros SET concluido = ? WHERE id = ?");
         $stmt->bind_param("ii", $concluido, $id);
 

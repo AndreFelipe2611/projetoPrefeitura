@@ -23,8 +23,8 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
     <div class="logo">Prefeitura</div>
     <button id="botao-menu" class="botao-menu" onclick="alternarAbas()">☰</button>
     <div id="abas" class="abas">
-        <button class="botao-historico" onclick="mostrarTabela('nao')">Não Concluídos</button>
-        <button class="botao-historico" onclick="mostrarTabela('sim')">Concluídos</button>
+        <button class="botao-vistosno" onclick="mostrarTabela('nao')">Não Concluídos</button>
+        <button class="botao-vistos" onclick="mostrarTabela('sim')">Concluídos</button>
         <button class="botao-historico" onclick="mostrarTabela('todos')">Todos</button>
         <a href="../logout.php">Sair</a>
     </div>
@@ -35,114 +35,12 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
         <h2>Olá caro colaborador, bora trabalhar??</h2>
     </div>
 
-    <div id="tabela-historico" class="caixa-tabela" style="display:none;">
-        <table class="tabela-registros">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <?php foreach ($colunas_tabela as $coluna): ?>
-                        <th><?php echo htmlspecialchars(ucfirst($coluna)); ?></th>
-                    <?php endforeach; ?>
-                    <th>Anexo</th>
-                    <th>Concluído</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $result = $conexao->query("SELECT * FROM registros ORDER BY id DESC");
-                if ($result->num_rows > 0):
-                    while ($linha = $result->fetch_assoc()):
-                        $concluido = (int)($linha['concluido'] ?? 0);
-                    ?>
-                    <tr data-concluido="<?php echo $concluido ? 'sim' : 'nao'; ?>" data-id="<?php echo $linha['id']; ?>">
-                        <td><?php echo $linha['id']; ?></td>
-                        <?php foreach ($colunas_tabela as $coluna): ?>
-                            <td><?php echo htmlspecialchars($linha[$coluna] ?? 'N/A'); ?></td>
-                        <?php endforeach; ?>
-                        <td>
-                            <?php if (!empty($linha['caminhoArquivo'])): ?>
-                                <a href="../uploads/<?php echo htmlspecialchars($linha['caminhoArquivo']); ?>" target="_blank" class="acao-visualizar">
-                                    Visualizar Anexo
-                                </a>
-                            <?php else: ?>
-                                <span>Sem anexo</span>
-                            <?php endif; ?>
-                        </td>
-                        <td class="coluna-checkbox">
-                            <input type="checkbox" class="checkbox-concluido" <?php echo $concluido ? 'checked' : ''; ?> />
-                        </td>
-                    </tr>
-                <?php
-                    endwhile;
-                else:
-                ?>
-                    <tr>
-                        <td colspan="<?php echo count($colunas_tabela) + 3; ?>">Nenhum registro encontrado.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+   <?php
+    include("../subPages/historico2.php");
+   ?>
 </div>
 
-<script>
-    function alternarAbas() {
-        const abas = document.getElementById("abas");
-        const botao = document.getElementById("botao-menu");
-        abas.classList.toggle("mostrar");
-        botao.classList.toggle("ativo");
-    }
-
-    function mostrarTabela(filtro) {
-        document.getElementById("mensagem-boas-vindas").style.display = "none";
-        const linhas = document.querySelectorAll(".tabela-registros tbody tr");
-
-        linhas.forEach(tr => {
-            const status = tr.getAttribute("data-concluido");
-            if (filtro === 'todos') {
-                tr.style.display = "";
-            } else {
-                tr.style.display = (status === filtro) ? "" : "none";
-            }
-        });
-
-        document.getElementById("tabela-historico").style.display = "block";
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // Mensagem inicial
-        document.getElementById("mensagem-boas-vindas").style.display = "flex";
-        document.getElementById("tabela-historico").style.display = "none";
-
-        // Delegação de evento para checkboxes
-        document.querySelector(".tabela-registros tbody").addEventListener("change", function (e) {
-            if (e.target.classList.contains("checkbox-concluido")) {
-                const checkbox = e.target;
-                const tr = checkbox.closest("tr");
-                const id = tr.getAttribute("data-id");
-                const novoStatus = checkbox.checked ? 1 : 0;
-
-                tr.setAttribute("data-concluido", checkbox.checked ? "sim" : "nao");
-
-                fetch("../controles/checkout.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: `id=${encodeURIComponent(id)}&concluido=${encodeURIComponent(novoStatus)}`
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log("Resposta do servidor:", data);
-                })
-                .catch(err => {
-                    alert("Erro ao salvar o status!");
-                    console.error(err);
-                });
-            }
-        });
-    });
-</script>
+ <script src="../assets/dashboard2.js"></script>
 
 </body>
 </html>

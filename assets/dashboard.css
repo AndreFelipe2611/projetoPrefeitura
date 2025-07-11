@@ -1,5 +1,5 @@
 /* ====================== */
-/* 🎨 RESET E LAYOUT BASE */
+/*  RESET E LAYOUT BASE */
 /* ====================== */
 body {
     margin: 0;
@@ -10,6 +10,17 @@ body {
     height: 100vh;
 }
 
+h2 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 250px;
+}
+
 .conteudo-principal {
     flex: 1;
     padding: 40px;
@@ -18,7 +29,7 @@ body {
 }
 
 /* ====================== */
-/* 📁 MENU LATERAL FIXO */
+/*  MENU LATERAL FIXO */
 /* ====================== */
 .menu-lateral {
     width: 240px;
@@ -39,7 +50,7 @@ body {
     letter-spacing: 2px;
 }
 
-/* 🍔 Botão hambúrguer */
+/* Botão hambúrguer */
 .botao-menu {
     background-color: white;
     color: #2c5364;
@@ -81,7 +92,6 @@ body {
     pointer-events: auto;
 }
 
-.abas button,
 .abas a {
     text-decoration: none;
     color: white;
@@ -95,13 +105,50 @@ body {
     cursor: pointer;
 }
 
-.abas button:hover,
 .abas a:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+
+.abas a,
+.botao-historico,
+.botao-adicionar,
+.verificados,
+.noverificados{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background 0.3s;
+}
+
+.abas a:hover,
+.botao-historico:hover,
+.botao-adicionar:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.botao-adicionar {
+    background: linear-gradient(to right, #0a832c, #429515);
+}
+
+.botao-historico {
+    background: linear-gradient(to right, #0a75e0d7, #045ab0);
+}
+
+.verificados{
+    background: linear-gradient(to right, #28e20b, #52e708);
+}
+
+.noverificados{
+   background: linear-gradient(to right, #d73b10, #da5005);
+}
+
 /* ====================== */
-/* ➕ FORMULÁRIO ADIÇÃO */
+/*  FORMULÁRIO ADIÇÃO */
 /* ====================== */
 #formulario-adicao form {
     display: flex;
@@ -147,7 +194,7 @@ body {
 }
 
 /* ====================== */
-/* 📜 TABELA DE HISTÓRICO */
+/*  TABELA DE HISTÓRICO */
 /* ====================== */
 .caixa-tabela {
     display: flex;
@@ -184,23 +231,25 @@ body {
     letter-spacing: 1px;
 }
 
+.acao-visualizar {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #1647f9;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
 .tabela-registros tr:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ====================== */
-/* 🏷️ STATUS DO REGISTRO */
+/*  STATUS DO REGISTRO */
 /* ====================== */
 .tabela-registros td:last-child {
     font-weight: bold;
 }
 
-.tabela-registros td:last-child::before {
-    content: "❌ ";
-    color: #ff4c4c;
-}
-
-.tabela-registros tr[data-status="verificado"] td:last-child::before {
-    content: "✅ ";
-    color: #00cc66;
-}

@@ -75,8 +75,9 @@ body {
 }
 
 .abas a,
-.botao-historico,
-.botao-adicionar {
+.botao-vistosno,
+.botao-vistos,
+.botao-historico {
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -92,12 +93,16 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.botao-historico {
-    background: linear-gradient(to right, #1161b8, #29323c);
+.botao-vistosno {
+    background: linear-gradient(to right, #eb5237, #dc5637);
 }
 
-.botao-adicionar {
-    background: linear-gradient(to right, #00c6ff, #0072ff);
+.botao-vistos {
+    background: linear-gradient(to right, #56f720, #60e518);
+}
+
+.botao-historico {
+    background: linear-gradient(to right, #08d6ffd7, #0baaee);
 }
 
 .caixa-tabela {
@@ -155,7 +160,7 @@ body {
     background-color: #e8590c;
 }
 
-/* ✅ Estilo para coluna de checkbox */
+/* Estilo para coluna de checkbox */
 .coluna-checkbox {
     text-align: center;
 }

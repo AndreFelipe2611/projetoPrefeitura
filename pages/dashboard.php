@@ -37,7 +37,7 @@ while ($coluna = $colunas_resultado->fetch_assoc()) {
 
     <div class="conteudo-principal">
         <div id="mensagem-boas-vindas" class="mensagem-central">
-            <h2>Olá caro colaborador, bora trabalhar??</h2>
+            <h2>Olá caro colaborador</h2>
         </div>
 
        <?php

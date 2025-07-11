@@ -32,16 +32,16 @@ if (!empty($dados)) {
     $colunas = array_keys($dados);
     $valores = array_values($dados);
     
-    // Monta a string de colunas (`nome`, `caminhoArquivo`)
+    // Monta a string de colunas (nome, caminhoArquivo)
     $nomesColunas = implode(", ", array_map(function($col) { return "`$col`"; }, $colunas));
     
-    // Placeholders (?, ?, ?)
+    // Placeholders 
     $placeholders = implode(", ", array_fill(0, count($valores), '?'));
 
-    // Prepared statement
+    
     $stmt = $conexao->prepare("INSERT INTO registros ($nomesColunas) VALUES ($placeholders)");
 
-    // Assume que todos os campos são texto (s)
+    // Assume que todos os campos são textos
     $tipos = str_repeat('s', count($valores));
     $stmt->bind_param($tipos, ...$valores);
 

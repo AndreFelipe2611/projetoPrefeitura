@@ -1,15 +1,13 @@
 <?php
 session_start();
-require_once './conexao.php'; // Garanta que este caminho está correto
+require_once './conexao.php';
 
 // Se o usuário já estiver logado, redireciona para a página correta
 if (isset($_SESSION['usuario'])) {
     if ($_SESSION['usuario'] === 'ansal') {
-        // CORRIGIDO: padronizado para a pasta 'telas'
         header("Location: ./pages/dashboard.php");
         exit();
     } elseif ($_SESSION['usuario'] === 'prefeitura') {
-        // CORRIGIDO: padronizado para a pasta 'telas'
         header("Location: ./pages/dashboard2.php");
         exit();
     }
@@ -35,11 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: ./pages/dashboard.php");
                 exit();
             } elseif ($usuario['nome'] === 'prefeitura') {
-                // CORRIGIDO: Apontava para um arquivo inexistente. Agora aponta para o correto.
                 header("Location: ./pages/dashboard2.php");
                 exit();
             } else {
-                header("Location: ./telas/dashboard.php");
+                header("");
                 exit();
             }
 

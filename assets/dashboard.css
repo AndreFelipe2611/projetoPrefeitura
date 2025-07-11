@@ -1,6 +1,6 @@
-/* ====================== */
+
 /*  RESET E LAYOUT BASE */
-/* ====================== */
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,9 +28,9 @@ h2 {
     backdrop-filter: blur(6px);
 }
 
-/* ====================== */
+
 /*  MENU LATERAL FIXO */
-/* ====================== */
+
 .menu-lateral {
     width: 240px;
     background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
@@ -50,7 +50,7 @@ h2 {
     letter-spacing: 2px;
 }
 
-/* Botão hambúrguer */
+/* Botão menu*/
 .botao-menu {
     background-color: white;
     color: #2c5364;
@@ -147,9 +147,9 @@ h2 {
    background: linear-gradient(to right, #d73b10, #da5005);
 }
 
-/* ====================== */
+
 /*  FORMULÁRIO ADIÇÃO */
-/* ====================== */
+
 #formulario-adicao form {
     display: flex;
     flex-direction: column;
@@ -193,9 +193,9 @@ h2 {
     transform: scale(1.03);
 }
 
-/* ====================== */
+
 /*  TABELA DE HISTÓRICO */
-/* ====================== */
+
 .caixa-tabela {
     display: flex;
     justify-content: center;
@@ -246,9 +246,8 @@ h2 {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ====================== */
 /*  STATUS DO REGISTRO */
-/* ====================== */
+
 .tabela-registros td:last-child {
     font-weight: bold;
 }

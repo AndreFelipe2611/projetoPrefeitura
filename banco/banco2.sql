@@ -1,0 +1,1 @@
+ALTER TABLE registros CHANGE caminho_arquivo caminhoArquivo VARCHAR(255);

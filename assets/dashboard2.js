@@ -26,7 +26,7 @@
         document.getElementById("mensagem-boas-vindas").style.display = "flex";
         document.getElementById("tabela-historico").style.display = "none";
 
-        // Delegação de evento para checkboxes
+       
         document.querySelector(".tabela-registros tbody").addEventListener("change", function (e) {
             if (e.target.classList.contains("checkbox-concluido")) {
                 const checkbox = e.target;
